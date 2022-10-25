@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
+from django.contrib.auth.models import User
 
 MEALS = (
     ('B', 'Breakfast'),
@@ -20,7 +22,8 @@ class Cat(models.Model):
     description = models.TextField(max_length=250)
     age = models.IntegerField()
     toys = models.ManyToManyField(Toy)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     # changes to instance methods do not require re-generation / running of migrations
     def __str__(self):
         return self.name
@@ -44,6 +47,6 @@ class Feeding(models.Model):
 
     # change the default sort
     class Meta:
-        ordering = ['-date']
+     ordering = ['-date']
 
 
